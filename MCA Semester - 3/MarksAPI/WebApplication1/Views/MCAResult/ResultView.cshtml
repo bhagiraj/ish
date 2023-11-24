@@ -1,0 +1,29 @@
+﻿
+
+@using WebApplication1.Models
+@{
+    ViewBag.Title = "ResultView";
+
+    List<Subject_Master> subject_Masters = new Subject_Master().GetAllSubject();
+    List<Marks_Master> Marks = new Marks_Master().GetAllStudent();
+}
+
+<table class="table table-responsive" style="margin-top:15px;">
+    <tr>
+        <td>Enrollment No</td>
+        <td>Roll No</td>
+        @foreach (Subject_Master sm in subject_Masters.ToList()) 
+        { 
+            <td>@sm.Subject_Name</td>
+        }
+        <td>Total</td>
+    </tr>
+    @foreach (var mm in Marks.Select(m=>m.Enrollment_No).ToList().Distinct().ToList()) 
+    { 
+        <tr>
+            <td>@mm</td>
+            <td></td>
+        </tr>
+    }
+</table>
+
